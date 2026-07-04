@@ -87,15 +87,16 @@ const server = http.createServer((req, res) => {
             }
             catch (err) {
 
-                console.error(err);
-
+                console.error("Database Error:", err);
+            
                 res.writeHead(500, {
                     "Content-Type": "application/json"
                 });
-
+            
                 res.end(JSON.stringify({
                     success: false,
-                    message: "Database Error"
+                    message: err.message,
+                    detail: err.detail || ""
                 }));
 
             }
